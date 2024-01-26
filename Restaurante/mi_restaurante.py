@@ -151,8 +151,41 @@ def guardar():
     fob.close()
     messagebox.showinfo('Informacion','Su recibo ha sido guardado')
 
+def resetear():
+    texto_recibo.delete(0.1,END)
+    for texto in texto_comida:
+        texto.set('0')
+
+    for texto in texto_bebida:
+        texto.set('0')
+    
+    for texto in texto_postre:
+        texto.set('0')
+
+    for cuadro in cuadros_comida:
+        cuadro.config(state=DISABLED)
+    for cuadro in cuadros_bebida:
+        cuadro.config(state=DISABLED)
+    for cuadro in cuadros_postre:
+        cuadro.config(state=DISABLED)
+
+    for v in  variables_comida:
+        v.set(0)
+    for v in  variables_bebida:
+        v.set(0)
+    for v in  variables_postre:
+        v.set(0)
+
+     
+    var_costo_comida.set('')
+    var_costo_bebida.set('')
+    var_costo_postre.set('')
+    var_costo_subtotal.set('')
+    var_costo_impuesto.set('')
+    var_costo_total.set('')
 
     
+
 
 #iniciar tkinter
 aplicacion = Tk()
@@ -442,6 +475,7 @@ for boton in botones:
 botones_creados[0].config(command=total)
 botones_creados[1].config(command=recibo)
 botones_creados[2].config(command=guardar)
+botones_creados[3].config(command=resetear)
 
 #area de recibo
     
