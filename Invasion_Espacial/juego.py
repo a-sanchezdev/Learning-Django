@@ -52,6 +52,7 @@ for e in range(cantidad_enemigos):
     enemigo_y_cambio.append(50)
 
 #variables del bala
+balas = []
 img_ju3= os.path.join(os.path.dirname(__file__), "bullet.png")
 img_bala = pygame.image.load(img_ju3)
 bala_x = 0
@@ -126,10 +127,23 @@ while se_ejecuta:
                 sonido_bala = mixer.Sound(ruta_musica_bala)
                 sonido_bala.set_volume(0.3)
                 sonido_bala.play()
+                nueva_bala = {
+                    "x": jugador_x,
+                    "y": jugador_y,
+                    "velocidad": -5
+                    }
+                balas.append(nueva_bala)
 
                 if not bala_visible:
                     bala_x = jugador_x
                     disparar_bala(bala_x,bala_y)
+                
+                # Movimiento bala
+                for bala in balas:
+                    bala["y"] += bala["velocidad"]
+                    pantalla.blit(img_bala, (bala["x"] + 16, bala["y"] + 10))
+                    if bala["y"] < 0:
+                        balas.remove(bala)
 
         #evento soltar flechas
         if evento.type == pygame.KEYUP:
