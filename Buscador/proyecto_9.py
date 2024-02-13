@@ -14,7 +14,7 @@ archivos_encontrados=[]
 
 
 def buscar_numero(archivo,patron):
-    este_archivo = open(archivo,'r')
+    este_archivo = open(archivo,mode='r')
     texto = este_archivo.read()
     if re.search(patron,texto):
         return re.search(patron,texto)
@@ -24,6 +24,7 @@ def buscar_numero(archivo,patron):
 def crear_listas():
     for carpeta,subcarpeta,archivo in os.walk(ruta):
         for a in archivo:
+            # print(Path(carpeta,a),mi_patron)
             resultado = buscar_numero(Path(carpeta,a),mi_patron)
             if resultado != '':
                 numeros_encontrados.append((resultado.group()))
@@ -35,8 +36,8 @@ def mostrar_todo():
     print('--'*50)
     print(f'Fecha de búsqueda: {hoy.day}/{hoy.month}/{hoy.year}')
     print('\n')
-    print('ARCHIVO\t\t\tNRO. SERIE')
-    print('-------\t\t\t----------')
+    print('ARCHIVO\t\tNRO. SERIE')
+    print('-------\t\t----------')
     for a in archivos_encontrados:
         print(f'{a}\t{numeros_encontrados[indice]}')
         indice+=1
@@ -48,5 +49,7 @@ def mostrar_todo():
     print('--'*50)
 
 
+
+# buscar_numero()
 crear_listas()
 mostrar_todo()
